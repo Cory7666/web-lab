@@ -1,0 +1,49 @@
+#navbar {
+  background-color: var(--background-color);
+  position: sticky;
+  top: 0;
+  z-index: var(--zorder-base);
+
+  display: flex;
+  justify-content: space-between;
+}
+
+#navbar a {
+  color: var(--link-color);
+  display: inline-block;
+  padding: 3px 0 10px 0;
+  position: relative;
+  min-width: 10vw;
+  text-align: center;
+  text-decoration: none;
+}
+
+#navbar a.youre-here {
+  color: var(--link-hover-color);
+  text-decoration: line-through;
+}
+
+#navbar a:hover {
+  color: var(--link-hover-color);
+}
+
+#navbar div:first-child a:not(:first-child) {
+  border-left: var(--link-border-color) var(--border-width) solid;
+  border-right: var(--link-border-color) var(--border-width) solid;
+}
+
+#navbar div:first-child a:first-child {
+  border-right: var(--link-border-color) var(--border-width) solid;
+}
+
+#navbar div:first-child a:last-child {
+  border-right: var(--link-border-color) calc(2 * var(--border-width)) solid;
+}
+
+#navbar div:last-child a {
+  border-left: calc(2 * var(--border-width)) var(--link-border-color) solid;
+}
+
+#navbar>div {
+  display: inline-block;
+}

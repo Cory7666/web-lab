@@ -1,0 +1,19 @@
+.modal-window-container {
+  background-color: rgba(0, 0, 0, 0.8);
+  bottom: 0;
+  display: flex;
+  left: 0;
+  right: 0;
+  top: 0;
+  position: fixed;
+  z-index: calc(var(--zorder-base) + 1000);
+
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-window-container .modal-window {
+  background-color: var(--background-color);
+  margin: auto;
+  width: 40vw;
+}

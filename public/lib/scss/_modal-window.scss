@@ -1,0 +1,24 @@
+@import "./vars";
+
+$background-color: rgb(22, 27, 34);
+$zorder-base: 1000;
+
+.modal-window-container {
+  background-color: rgba(0, 0, 0, 0.8);
+  bottom: 0;
+  display: flex;
+  left: 0;
+  right: 0;
+  top: 0;
+  position: fixed;
+  z-index: $zorder-base;
+
+  justify-content: center;
+  align-items: center;
+
+  .modal-window {
+    background-color: $background-color;
+    margin: auto;
+    width: 40vw;
+  }
+}

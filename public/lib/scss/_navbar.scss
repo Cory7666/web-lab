@@ -1,0 +1,57 @@
+@import "./vars";
+
+$background-color: rgb(22, 27, 34);
+$border-width: 2px;
+$link-border-color: rgb(38, 38, 38);
+$zorder-base: 500;
+
+#navbar {
+  background-color: $background-color;
+  position: sticky;
+  top: 0;
+  z-index: $zorder-base;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+#navbar a {
+  color: $link-color;
+  display: inline-block;
+  padding: 3px 0 10px 0;
+  position: relative;
+  min-width: 10vw;
+  text-align: center;
+  text-decoration: none;
+}
+
+#navbar a.youre-here {
+  color: $link-hover-color;
+  text-decoration: line-through;
+}
+
+#navbar a:hover {
+  color: $link-hover-color;
+}
+
+#navbar div:first-child a:not(:first-child) {
+  border-left: $link-border-color $border-width solid;
+  border-right: $link-border-color $border-width solid;
+}
+
+#navbar div:first-child a:first-child {
+  border-right: $link-border-color $border-width solid;
+}
+
+#navbar div:first-child a:last-child {
+  border-right: $link-border-color (
+    2 * $border-width) solid;
+}
+
+#navbar div:last-child a {
+  border-left: (2 * $border-width) $link-border-color solid;
+}
+
+#navbar>div {
+  display: inline-block;
+}

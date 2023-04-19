@@ -1,0 +1,5 @@
+div.card-content img.icon-like
+{
+  height: calc(10 * var(--text-font-size));
+  padding: var(--text-font-size);
+}

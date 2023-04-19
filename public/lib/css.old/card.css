@@ -1,0 +1,19 @@
+div.card {
+  margin-top: 20px;
+}
+
+div.card-header {
+  font-size: calc(1.2 * var(--header-font-size-mod));
+  margin: 10px 0 20px 10px;
+  text-decoration: underline;
+}
+
+div.card-content {
+  background-color: var(--background-color);
+  border-color: var(--border-color);
+  border-radius: 8px;
+  border-style: solid;
+  border-width: 2px;
+  padding: var(--text-font-size) 20pt calc(0.9 * var(--text-font-size)) 20pt;
+  text-align: justify;
+}

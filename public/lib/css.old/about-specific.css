@@ -1,0 +1,22 @@
+#content-container {
+  justify-content: space-around;
+}
+
+#contacts {}
+
+#contacts label {
+  padding-right: 10pt;
+}
+
+#contacts input+label {
+  padding-left: 20pt;
+}
+
+#contacts input {
+  padding-bottom: 4pt;
+}
+
+table td {
+  border: 1px solid white;
+  text-align: center;
+}

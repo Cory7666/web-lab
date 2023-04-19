@@ -1,0 +1,9 @@
+@import "./vars";
+
+.calendar {
+  background-color: $background-color;
+
+  .calendar-body tbody td:hover {
+    background-color: green;
+  }
+}

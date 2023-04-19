@@ -1,0 +1,9 @@
+.calendar
+{
+  background-color: var(--background-color);
+}
+
+.calendar .calendar-body tbody td:hover
+{
+  background-color: green;
+}

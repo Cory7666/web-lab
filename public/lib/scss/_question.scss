@@ -1,0 +1,20 @@
+@import "./vars";
+
+.question {
+  margin: 10px auto 20px;
+
+  .question-header {
+    font-size: $header-font-size-mod;
+    text-decoration: underline;
+  }
+
+  ul.question-answers,
+  ol.question-answers {
+    list-style-type: decimal;
+    list-style-position: inside;
+  }
+
+  .question-answers label {
+    margin-right: 10pt;
+  }
+}

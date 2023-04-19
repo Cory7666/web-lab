@@ -1,0 +1,8 @@
+@import "./generic-styles";
+
+div.card-content {
+  img.icon-like {
+    height: 10 * $text-font-size;
+    padding: $text-font-size;
+  }
+}

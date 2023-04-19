@@ -1,0 +1,24 @@
+$message-border-radius: 20px;
+$message-background-color: rgba(255, 0, 0, 0.2);
+
+.message {
+  border-color: white;
+  border-radius: $message-border-radius;
+  font-family: 'Comic Sans' monospace;
+  margin-bottom: 20px;
+  padding: $message-border-radius / 2;
+
+  .message-header {
+    font-size: 200%;
+    font-weight: bold;
+    border-bottom: solid black 1px;
+  }
+
+  .message-body {
+    padding-left: 20px;
+  }
+}
+
+.e-m {
+  background-color: $message-background-color;
+}

@@ -1,0 +1,23 @@
+@import "./generic-styles";
+@import "./calendar";
+@import "./message";
+@import "./modal-window";
+
+#contacts {
+  label {
+    padding-right: 10pt;
+  }
+
+  input {
+    padding-bottom: 4pt;
+
+    +label {
+      padding-left: 20pt;
+    }
+  }
+}
+
+table td {
+  border: 1px solid white;
+  text-align: center;
+}
