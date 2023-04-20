@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\LedgerPageController;
+use App\Http\Controllers\BlogPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +34,11 @@ Route::get('/about/', function () {
 });
 
 Route::get('/fotos/', function () {
+    $select_result = DB::select("SELECT COUNT(*) as 'a' FROM 'user';");
     return view('fotos', [
         "page_title" => "Фотоальбом",
-        "internal_path" => "/fotos/"
+        "internal_path" => "/fotos/",
+        "additional_message" => $select_result[0]->a
     ]);
 });
 
@@ -47,4 +52,14 @@ Route::get('/test/', function () {
 Route::post(
     '/action/contact/new',
     [ContactsController::class, 'onNewRequest']
+);
+
+Route::get(
+    '/ledger/',
+    [LedgerPageController::class, 'onGetRequest']
+);
+
+Route::get(
+    '/blog/',
+    [BlogPageController::class, 'onGetRequest']
 );

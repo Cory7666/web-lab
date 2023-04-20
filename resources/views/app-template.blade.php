@@ -20,7 +20,13 @@
 <body>
     <nav id="navbar">
         <div>
-            @foreach ([['/', '/'], ['/fotos/', '/ Фотоальбом'], ['/about/', '/ О проекте']] as $item)
+            @foreach ([
+                ['/', '/'],
+                ['/fotos/', '/ Фотоальбом'],
+                ['/about/', '/ О проекте'],
+                ['/blog/', '/ Блог'],
+                ['/ledger/', '/ Отзывы']
+                ] as $item)
                 <a @if ('/about/' == $item[0]) id="aboutMenuItem" @endif
                     @if ($internal_path == $item[0]) class="youre-here" @endif
                     href="{{ $item[0] }}">{{ $item[1] }}</a>
