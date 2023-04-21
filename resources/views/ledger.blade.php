@@ -12,7 +12,7 @@
             <h2>Отзывы</h2>
         </div>
         <div class="card-content">
-
+            <x-comment author="Alex A." email="alex@localhosters.org" comment-body="123" created-at="2022-88-88" />
         </div>
     </div>
 @endsection
