@@ -4,8 +4,8 @@ namespace App\Http\ActiveDirectory;
 
 interface BaseActiveDirectory
 {
-  public function save();
-  public function delete();
-  public function find($id);
-  public function findAll();
+  public function save() : bool;
+  public function delete() : bool;
+  public function find(int $id) : bool;
+  public static function findAll() : array;
 }
