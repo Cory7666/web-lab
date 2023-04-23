@@ -12,7 +12,13 @@
             <h2>Отзывы</h2>
         </div>
         <div class="card-content">
-            <x-comment author="Alex A." email="alex@localhosters.org" comment-body="123" created-at="2022-88-88" />
+            @foreach ($comments as $comment)
+                <x-comment
+                    :author="$comment->lastname . ' ' . $comment->firstname[0] . '.'"
+                    :email="$comment->email"
+                    :comment-body="$comment->body_text"
+                    :created-at="$comment->created_at" />
+            @endforeach
         </div>
     </div>
 @endsection
