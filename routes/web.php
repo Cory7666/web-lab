@@ -7,6 +7,8 @@ use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\LedgerPageController;
 use App\Http\Controllers\BlogPageController;
 use App\Http\Controllers\TestsPageController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,4 +71,12 @@ Route::post(
 Route::get(
     '/blog/',
     [BlogPageController::class, 'onGetRequest']
+);
+
+Route::get(
+    '/images/{filename}',
+    function (Request $r, string $filename)
+    {
+        return Storage::drive('blog_images')->get($filename);
+    }
 );
