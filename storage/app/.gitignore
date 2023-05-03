@@ -1,5 +1,5 @@
 *
 !public/
-!blog-images/
-!blog-images/**
+!blog
+!blog/**
 !.gitignore

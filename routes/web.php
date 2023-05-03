@@ -69,14 +69,11 @@ Route::post(
 );
 
 Route::get(
-    '/blog/',
+    '/blog',
     [BlogPageController::class, 'onGetRequest']
 );
 
-Route::get(
-    '/images/{filename}',
-    function (Request $r, string $filename)
-    {
-        return Storage::drive('blog_images')->get($filename);
-    }
+Route::post(
+    '/blog',
+    [BlogPageController::class, 'onPostRequest']
 );

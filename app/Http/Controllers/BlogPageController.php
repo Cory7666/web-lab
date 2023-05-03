@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogRecord;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+
+use function Termwind\render;
 
 class BlogPageController extends Controller
 {
     public function onGetRequest(Request $r)
     {
-        Storage::disk('blog_images')->put('123.txt', "Hello, World! I am a dumbest document in the Storage.");
         return view(
             'blog',
             [
@@ -19,5 +19,36 @@ class BlogPageController extends Controller
                 'records' => BlogRecord::all(),
             ]
         );
+    }
+
+    public function onPostRequest(Request $r)
+    {
+        $this->validate(
+            $r,
+            [
+                'title' => ['required'],
+                'body' => ['required'],
+            ]
+        );
+        
+        render($r->hasFile('uploaded_image'));
+        if ($r->hasFile('uploaded_image'))
+        {
+            $local_filename = $r->file('uploaded_image')->store('/images', 'blog');
+            BlogRecord::create([
+                'title' => $r->title,
+                'body_text' => $r->body,
+                'image_path' => $local_filename,
+            ]);
+        }
+        else
+        {
+            BlogRecord::create([
+                'title' => $r->title,
+                'body_text' => $r->body,
+            ]);
+        }
+
+        return redirect('/blog');
     }
 }

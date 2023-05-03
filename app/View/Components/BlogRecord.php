@@ -24,7 +24,7 @@ class BlogRecord extends Component
                 'title' => $this->title,
                 'created_at' => $this->createdAt,
                 'body_text' => $this->bodyText,
-                'imagepath' => (($this->imagePath == '' || $this->imagePath == NULL) ? FALSE : "/images/" . $this->imagePath),
+                'imagepath' => (($this->imagePath == '' || $this->imagePath == NULL) ? FALSE : "/lib/blog/" . $this->imagePath),
             ]
         );
     }
