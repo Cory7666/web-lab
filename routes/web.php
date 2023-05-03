@@ -55,8 +55,13 @@ Route::post(
 );
 
 Route::get(
-    '/ledger/',
+    '/ledger{response_type?}',
     [LedgerPageController::class, 'onGetRequest']
+);
+
+Route::post(
+    '/ledger',
+    [LedgerPageController::class, "onAddNew"]
 );
 
 Route::get(

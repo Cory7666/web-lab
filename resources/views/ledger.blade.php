@@ -14,11 +14,13 @@
         <div class="card-content">
             @foreach ($comments as $comment)
                 <x-comment
-                    :author="$comment->lastname . ' ' . $comment->firstname[0] . '.'"
+                    :author-firstname="$comment->firstname"
+                    :author-lastname="$comment->lastname"
                     :email="$comment->email"
                     :comment-body="$comment->body_text"
                     :created-at="$comment->created_at" />
             @endforeach
+            {{ $comments->links('pagination.default') }}
         </div>
     </div>
 @endsection
