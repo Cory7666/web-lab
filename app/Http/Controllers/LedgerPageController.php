@@ -31,9 +31,9 @@ class LedgerPageController extends Controller
 
     public function onAddNew(Request $r)
     {
-        if ($r->hasFile('file'))
+        if ($r->hasFile('uploaded_file'))
         {
-            $file = $r->file('file');
+            $file = $r->file('uploaded_file');
             $fd = fopen($file->openFile()->getPathname(), 'r');
             $header = fgetcsv($fd);
 
@@ -47,7 +47,7 @@ class LedgerPageController extends Controller
                 ]);
             }
 
-            return response()->json();
+            return redirect("/");
         }
         else
         {

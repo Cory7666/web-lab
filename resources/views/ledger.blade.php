@@ -12,6 +12,10 @@
             <h2>Отзывы</h2>
         </div>
         <div class="card-content">
+            <form action="/ledger" enctype="multipart/form-data" method="POST">
+                <input type="file" name="uploaded_file" id="ledger-file-input" />
+                <input type="submit" value="Отправить" />
+            </form>
             @foreach ($comments as $comment)
                 <x-comment
                     :author-firstname="$comment->firstname"
