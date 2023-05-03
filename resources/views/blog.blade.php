@@ -21,6 +21,7 @@
                         :image-path="$record->image_path"
                     />
                 @endforeach
+                {{ $records->links('pagination.default') }}
             @else
                 <p>Nobody here but us chickens!</p>
             @endif

@@ -9,6 +9,8 @@ use function Termwind\render;
 
 class BlogPageController extends Controller
 {
+    private static int $perPageMessagesCount = 4;
+
     public function onGetRequest(Request $r)
     {
         return view(
@@ -16,7 +18,7 @@ class BlogPageController extends Controller
             [
                 "page_title" => "Мой блог",
                 "internal_path" => "/blog/",
-                'records' => BlogRecord::all(),
+                'records' => BlogRecord::orderBy('created_at', 'desc')->paginate(BlogPageController::$perPageMessagesCount),
             ]
         );
     }
