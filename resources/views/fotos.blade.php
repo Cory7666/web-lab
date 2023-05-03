@@ -53,9 +53,6 @@
 
                 </tbody>
             </table>
-            <div>
-                {{ $additional_message }}
-            </div>
         </div>
     </div>
 @endsection

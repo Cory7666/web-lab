@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\LedgerPageController;
 use App\Http\Controllers\BlogPageController;
+use App\Http\Controllers\TestsPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,20 +35,21 @@ Route::get('/about/', function () {
 });
 
 Route::get('/fotos/', function () {
-    $select_result = DB::select("SELECT COUNT(*) as 'a' FROM 'user';");
     return view('fotos', [
         "page_title" => "Фотоальбом",
         "internal_path" => "/fotos/",
-        "additional_message" => $select_result[0]->a
     ]);
 });
 
-Route::get('/test/', function () {
-    return view('test', [
-        "page_title" => "Тест",
-        "internal_path" => "/test/"
-    ]);
-});
+Route::get(
+    '/test',
+    [TestsPageController::class, 'onGetRequest']
+);
+
+Route::post(
+    '/test',
+    [TestsPageController::class, 'onPostRequest']
+);
 
 Route::post(
     '/action/contact/new',

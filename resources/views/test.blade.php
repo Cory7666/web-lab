@@ -39,7 +39,9 @@
             <h1>Тест</h1>
         </div>
         <div class="card-content">
-            <form action="mailto:activity.alex69985@gmail.com">
+            <form action="/test" method="POST">
+                @csrf
+
                 <div class="question">
                     <label for="name">Я </label><input id="name" name="name" type="text">
                     <label for="group">Из </label>
@@ -85,6 +87,41 @@
                     <input id="submitButton" type="button" value="Отправить" />
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h1>Ответы других</h1>
+        </div>
+        <div class="card-content">
+            @if(count($answers) > 0)
+                <table style="width: 100%">
+                    <thead>
+                        <tr>
+                            <td>ФИО</td>
+                            <td>Код группы</td>
+                            <td>Дата</td>
+                            <td>Ответ на вопрос 1</td>
+                            <td>Ответ на вопрос 2</td>
+                            <td>Ответ на вопрос 3</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($answers as $answer)
+                            <tr>
+                                <td>{{$answer->name}}</td>
+                                <td>{{$answer->group}}</td>
+                                <td>{{$answer->created_at}}Z</td>
+                                <td>{{$answer->q1_answer}}</td>
+                                <td>{{$answer->q2_answer}}</td>
+                                <td>{{$answer->q3_answer}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                Нет ответов.
+            @endif
         </div>
     </div>
 @endsection
