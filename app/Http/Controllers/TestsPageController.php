@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SpyingRecord;
 use App\Models\TestAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,8 @@ class TestsPageController extends Controller
 {
     public function onGetRequest(Request $r)
     {
+        SpyingRecord::spy_stealthily($r);
+
         return view('test', [
             "page_title" => "Тест",
             "internal_path" => "/test/",

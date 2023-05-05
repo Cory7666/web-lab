@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\LedgerPageController;
@@ -11,7 +10,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
+use App\Models\SpyingRecord;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,21 +24,24 @@ use Illuminate\Support\Facades\Storage;
 */
 
 
-Route::get('/', function () {
+Route::get('/', function (Request $r) {
+    SpyingRecord::spy_stealthily($r);
     return view('main', [
         "page_title" => "Главная страница",
         "internal_path" => "/"
     ]);
 });
 
-Route::get('/about/', function () {
+Route::get('/about/', function (Request $r) {
+    SpyingRecord::spy_stealthily($r);
     return view('about', [
         "page_title" => "Об",
         "internal_path" => "/about/"
     ]);
 });
 
-Route::get('/fotos/', function () {
+Route::get('/fotos/', function (Request $r) {
+    SpyingRecord::spy_stealthily($r);
     return view('fotos', [
         "page_title" => "Фотоальбом",
         "internal_path" => "/fotos/",
@@ -110,6 +112,7 @@ Route::post(
 Route::get(
     '/lk',
     function (Request $r) {
+        SpyingRecord::spy_stealthily($r);
         if (Auth::check()) {
             return view('lk', [
                 "page_title" => "Личный кабинет",

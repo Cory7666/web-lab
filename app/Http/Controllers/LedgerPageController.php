@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\LedgerComment;
+use App\Models\SpyingRecord;
 use Illuminate\Support\Facades\Auth;
 
 class LedgerPageController extends Controller
@@ -13,6 +14,8 @@ class LedgerPageController extends Controller
 
     public function onGetRequest(Request $r, string $responseType = '.html')
     {
+        SpyingRecord::spy_stealthily($r);
+
         switch ($responseType) {
             case ".json":
                 return response()->json(LedgerComment::paginate(LedgerPageController::$perPageCommentCount));

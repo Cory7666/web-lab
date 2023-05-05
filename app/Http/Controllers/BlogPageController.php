@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogRecord;
+use App\Models\SpyingRecord;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,6 +13,8 @@ class BlogPageController extends Controller
 
     public function onGetRequest(Request $r)
     {
+        SpyingRecord::spy_stealthily($r);
+
         return view(
             'blog',
             [
