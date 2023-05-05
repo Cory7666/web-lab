@@ -22,7 +22,7 @@
             <h2>О пользователе</h2>
         </div>
         <div class="card-content">
-            <p>ФИО: {{ $current_user->name }}</p>
+            <p>ФИО: {{ $current_user->firstname . ' ' . $current_user->lastname }}</p>
             <p>Email: {{ $current_user->email }}</p>
             <p>Тип учётной записи: {{ $current_user->account_type == 'admin' ? 'Администратор' : 'Пользователь Обычный' }}
             </p>

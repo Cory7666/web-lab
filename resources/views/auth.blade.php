@@ -59,8 +59,12 @@
             <form action="/action/register" method="post">
                 @csrf
 
-                <label for="name-input">ФИО </label>
-                <input type="text" name="name" id="name-input" />
+                <label for="firstname-input">Имя </label>
+                <input type="text" name="firstname" id="firstname-input" />
+                <br />
+
+                <label for="lastname-input">Фамилия </label>
+                <input type="text" name="lastname" id="lastname-input" />
                 <br />
 
                 <label for="email-input">Логин </label>

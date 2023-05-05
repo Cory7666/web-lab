@@ -13,7 +13,8 @@ class AuthController extends Controller
     {
         if (User::where('email', '=', 'master.alex@localhost')->count() < 1) {
             User::create([
-                'name' => 'Alex Alexeev',
+                'firstname' => 'Alex',
+                'lastname' => 'Alexeev',
                 'email' => 'master.alex@localhost',
                 'password' => '12345',
                 'account_type' => 'admin'
@@ -33,19 +34,21 @@ class AuthController extends Controller
     public function onRegAction(Request $r)
     {
         $this->validate($r, [
-            'name' => ['required'],
+            'firstname' => ['required'],
+            'lastname' => ['required'],
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
 
-        $admin = $r->has('is-admin') && $r->get('is-admin', 'off') == 'on' ? 'admin' : 'user';
+        $account_type = $r->has('is-admin') && $r->get('is-admin', 'off') == 'on' ? 'admin' : 'user';
 
         try {
             $user = User::create([
-                'name' => $r->get('name'),
+                'firstname' => $r->get('firstname'),
+                'lastname' => $r->get('lastname'),
                 'email' => $r->get('email'),
                 'password' => $r->get('password'),
-                'account_type' => $admin
+                'account_type' => $account_type
             ]);
 
             Auth::login($user);
