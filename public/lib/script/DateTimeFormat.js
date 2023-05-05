@@ -7,7 +7,7 @@ class DateTimeFormat
 
   getFirstVariant()
   {
-    return `${this.date.getDate()}.${this.date.getMonth()}.${this.date.getFullYear() % 100} ${weekDays["en"][this.date.getDay()]}`;
+    return `${this.date.getDate()}.${this.date.getMonth() + 1}.${this.date.getFullYear() % 100} ${weekDays["en"][this.date.getDay()]}`;
   }
 
   getSecondVariant()
@@ -17,7 +17,7 @@ class DateTimeFormat
 
   getThirdVariant()
   {
-    return `${this.date.getDate()}.${this.date.getMonth()}.${this.date.getFullYear()} ${weekDays["ru"][this.date.getDay()]}`;
+    return `${this.date.getDate()}.${this.date.getMonth() + 1}.${this.date.getFullYear()} ${weekDays["ru"][this.date.getDay()]}`;
   }
 
   getFourVariant()

@@ -70,6 +70,11 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', $r->get('email'))->first();
+        if ($user == null)
+        {
+            return back()->withErrors(["Пользователь с такой почтой не существует."]);
+        }
+
         Auth::login($user);
 
         if (Auth::check()) {

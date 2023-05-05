@@ -10,7 +10,11 @@ document.addEventListener("DOMContentLoaded", () =>
     "/",
     "/fotos/",
     "/about/",
-    "/test/"
+    "/ledger",
+    "/blog/",
+    "/auth/",
+    "/lk/",
+    "/test/",
   ].forEach((x) => 
   {
     let x_n = normalizeName(x);
