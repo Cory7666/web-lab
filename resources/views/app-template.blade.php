@@ -34,6 +34,7 @@
         </div>
         <div>
             <a href="/test/">/ Тест</a>
+            <a href="/auth/">/ Войти</a>
             <a id="datetime-placeholder"></a>
         </div>
     </nav>

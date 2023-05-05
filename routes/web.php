@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\LedgerPageController;
 use App\Http\Controllers\BlogPageController;
 use App\Http\Controllers\TestsPageController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -76,4 +77,18 @@ Route::get(
 Route::post(
     '/blog',
     [BlogPageController::class, 'onPostRequest']
+);
+
+
+Route::get(
+    '/auth',
+    [AuthController::class, 'onGetRequest']
+);
+Route::post(
+    '/action/auth',
+    [AuthController::class, 'onAuthAction']
+);
+Route::post(
+    '/action/register',
+    [AuthController::class, 'onRegAction']
 );
