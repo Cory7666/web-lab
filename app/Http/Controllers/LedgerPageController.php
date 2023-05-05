@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\LedgerComment;
+use Illuminate\Support\Facades\Auth;
 
 class LedgerPageController extends Controller
 {
@@ -12,8 +13,7 @@ class LedgerPageController extends Controller
 
     public function onGetRequest(Request $r, string $responseType = '.html')
     {
-        switch ($responseType)
-        {
+        switch ($responseType) {
             case ".json":
                 return response()->json(LedgerComment::paginate(LedgerPageController::$perPageCommentCount));
             default:
@@ -22,7 +22,7 @@ class LedgerPageController extends Controller
                     [
                         "page_title" => "Книга отзывов",
                         "internal_path" => "/ledger/",
-        
+
                         'comments' => LedgerComment::paginate(LedgerPageController::$perPageCommentCount)
                     ]
                 );
@@ -31,29 +31,36 @@ class LedgerPageController extends Controller
 
     public function onAddNew(Request $r)
     {
-        if ($r->hasFile('uploaded_file'))
-        {
-            $file = $r->file('uploaded_file');
-            $fd = fopen($file->openFile()->getPathname(), 'r');
-            $header = fgetcsv($fd);
+        if (Auth::check()) {
+            if ($r->hasFile('uploaded_file')) {
+                $file = $r->file('uploaded_file');
+                $fd = fopen($file->openFile()->getPathname(), 'r');
+                $header = fgetcsv($fd);
 
-            while (($line = fgetcsv($fd)) !== FALSE)
-            {
+                while (($line = fgetcsv($fd)) !== FALSE) {
+                    LedgerComment::create([
+                        "firstname" => $line[0],
+                        "lastname" => $line[1],
+                        "email" => $line[2],
+                        "body_text" => $line[3],
+                    ]);
+                }
+
+                return redirect("/");
+            } else if ($r->has('text')) {
+                $curr_user = Auth::user();
                 LedgerComment::create([
-                    "firstname" => $line[0],
-                    "lastname" => $line[1],
-                    "email" => $line[2],
-                    "body_text" => $line[3],
+                    'firstname' => $curr_user->firstname,
+                    'lastname' => $curr_user->lastname,
+                    'email' => $curr_user->email,
+                    'body_text' => $r->get('text'),
                 ]);
+                return redirect("/");
+            } else {
+                return back()->withErrors(["Ожидается комментарий."]);
             }
-
-            return redirect("/");
-        }
-        else
-        {
-            return response()->json([
-                "error" => "Ожидается файл."
-            ]);
+        } else {
+            return back()->withErrors(["Вы должны бать зарегистрированы."]);
         }
     }
 }
