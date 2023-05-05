@@ -114,6 +114,7 @@ Route::get(
             return view('lk', [
                 "page_title" => "Личный кабинет",
                 "internal_path" => "/lk/",
+                "current_user" => Auth::user(),
             ]);
         } else {
             return redirect('/auth');
