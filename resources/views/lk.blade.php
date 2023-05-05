@@ -29,6 +29,28 @@
         </div>
     </div>
 
+    @isset($spying_records)
+    @if (count($spying_records) > 0)
+    <div class="card">
+        <div class="card-header">
+            <h2>Шпионаж</h2>
+        </div>
+        <div class="card-content">
+            @foreach ($spying_records as $record)
+                <x-spying-record
+                :datetime="$record->created_at"
+                :ip="$record->client_ip"
+                :user-agent="$record->client_user_agent"
+                :hostname="$record->client_hostname"
+                :path="$record->path"
+                />
+            @endforeach
+            {{ $spying_records->links('pagination.default') }}
+        </div>
+    </div>
+    @endif
+    @endisset
+    
     <div class="card">
         <div class="card-header">
             Действия

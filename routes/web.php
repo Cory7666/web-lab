@@ -114,10 +114,12 @@ Route::get(
     function (Request $r) {
         SpyingRecord::spy_stealthily($r);
         if (Auth::check()) {
+            $user = Auth::user();
             return view('lk', [
                 "page_title" => "Личный кабинет",
                 "internal_path" => "/lk/",
-                "current_user" => Auth::user(),
+                "current_user" => $user,
+                "spying_records" => $user->account_type == 'admin' ? SpyingRecord::orderBy('created_at', 'desc')->paginate(10) : []
             ]);
         } else {
             return redirect('/auth');
