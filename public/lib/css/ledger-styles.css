@@ -528,4 +528,26 @@ a {
 #aboutMenuItem-submenu {
   background-color: #010409; }
 
+.ledger-comment {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+  .ledger-comment .lc-author,
+  .ledger-comment .lc-aka,
+  .ledger-comment .lc-datetime,
+  .ledger-comment .lc-content {
+    display: block; }
+  .ledger-comment .lc-author {
+    font-weight: bold; }
+  .ledger-comment .lc-aka {
+    font-size: 90%; }
+  .ledger-comment .lc-datetime {
+    font-size: 70%; }
+  .ledger-comment .lc-content {
+    padding-left: 20px;
+    font-size: 120%;
+    text-align: justify; }
+    .ledger-comment .lc-content ::first-letter {
+      font-weight: bold;
+      font-size: 150%; }
+
 /*# sourceMappingURL=ledger-styles.css.map */

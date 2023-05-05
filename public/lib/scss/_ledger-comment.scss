@@ -1,0 +1,38 @@
+$neightbors-padding: 20px;
+$comment-color: white;
+$comment-border-radius: 100px;
+
+.ledger-comment {
+    padding-top: $neightbors-padding;
+    padding-bottom: $neightbors-padding;
+
+    .lc-author,
+    .lc-aka,
+    .lc-datetime,
+    .lc-content {
+        display: block;
+    }
+
+    .lc-author {
+        font-weight: bold;
+    }
+
+    .lc-aka {
+        font-size: 90%;
+    }
+
+    .lc-datetime {
+        font-size: 70%;
+    }
+
+    .lc-content {
+        padding-left: 20px;
+        font-size: 120%;
+        text-align: justify;
+
+        ::first-letter {
+            font-weight: bold;
+            font-size: 150%;
+        }
+    }
+}
