@@ -9,6 +9,8 @@ use App\Http\Controllers\BlogPageController;
 use App\Http\Controllers\TestsPageController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -91,4 +93,30 @@ Route::post(
 Route::post(
     '/action/register',
     [AuthController::class, 'onRegAction']
+);
+Route::post(
+    '/action/exit',
+    function (Request $r) {
+        if (Auth::check()) {
+            Auth::logout();
+            Session::flush();
+        }
+        return redirect('/');
+    }
+);
+
+
+
+Route::get(
+    '/lk',
+    function (Request $r) {
+        if (Auth::check()) {
+            return view('lk', [
+                "page_title" => "Личный кабинет",
+                "internal_path" => "/lk/",
+            ]);
+        } else {
+            return redirect('/auth');
+        }
+    }
 );

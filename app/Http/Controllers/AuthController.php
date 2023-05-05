@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-use function Termwind\render;
 
 class AuthController extends Controller
 {
@@ -21,12 +20,9 @@ class AuthController extends Controller
             ]);
         }
 
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             return redirect('/lk');
-        }
-        else
-        {
+        } else {
             return view('auth', [
                 "page_title" => "Вход",
                 "internal_path" => "/auth/",
@@ -44,16 +40,20 @@ class AuthController extends Controller
 
         $admin = $r->has('is-admin') && $r->get('is-admin', 'off') == 'on' ? 'admin' : 'user';
 
-        User::create([
-            'name' => $r->get('name'),
-            'email' => $r->get('email'),
-            'password' => $r->get('password'),
-            'account_type' => $admin
-        ]);
+        try {
+            $user = User::create([
+                'name' => $r->get('name'),
+                'email' => $r->get('email'),
+                'password' => $r->get('password'),
+                'account_type' => $admin
+            ]);
 
-        Auth::attempt(['email' => $r->get('email'), 'password' => $r->get('password')]);
+            Auth::login($user);
 
-        return redirect('/lk');
+            return redirect('/auth');
+        } catch (QueryException) {
+            return back()->withErrors(['Пользователь уже существует.']);
+        }
     }
 
     public function onAuthAction(Request $r)
@@ -63,9 +63,12 @@ class AuthController extends Controller
             'password' => ['required']
         ]);
 
-        if (Auth::attempt($cred)) {
+        $user = User::where('email', $r->get('email'))->first();
+        Auth::login($user);
+
+        if (Auth::check()) {
             $r->session()->regenerate();
-            return redirect('/');
+            return redirect('/auth');
         } else {
             return back()->withErrors(['Неверный логин или пароль.']);
         }
