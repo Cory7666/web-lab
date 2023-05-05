@@ -94,34 +94,40 @@
             <h1>Ответы других</h1>
         </div>
         <div class="card-content">
-            @if(count($answers) > 0)
-                <table style="width: 100%">
-                    <thead>
-                        <tr>
-                            <td>ФИО</td>
-                            <td>Код группы</td>
-                            <td>Дата</td>
-                            <td>Ответ на вопрос 1</td>
-                            <td>Ответ на вопрос 2</td>
-                            <td>Ответ на вопрос 3</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($answers as $answer)
+            @auth
+                @if (count($answers) > 0)
+                    <table style="width: 100%">
+                        <thead>
                             <tr>
-                                <td>{{$answer->name}}</td>
-                                <td>{{$answer->group}}</td>
-                                <td>{{$answer->created_at}}Z</td>
-                                <td>{{$answer->q1_answer}}</td>
-                                <td>{{$answer->q2_answer}}</td>
-                                <td>{{$answer->q3_answer}}</td>
+                                <td>ФИО</td>
+                                <td>Код группы</td>
+                                <td>Дата</td>
+                                <td>Ответ на вопрос 1</td>
+                                <td>Ответ на вопрос 2</td>
+                                <td>Ответ на вопрос 3</td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @else
-                Нет ответов.
-            @endif
+                        </thead>
+                        <tbody>
+                            @foreach ($answers as $answer)
+                                <tr>
+                                    <td>{{ $answer->name }}</td>
+                                    <td>{{ $answer->group }}</td>
+                                    <td>{{ $answer->created_at }}Z</td>
+                                    <td>{{ $answer->q1_answer }}</td>
+                                    <td>{{ $answer->q2_answer }}</td>
+                                    <td>{{ $answer->q3_answer }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    Нет ответов.
+                @endif
+            @endauth
+
+            @guest
+                <p><a href="/auth">Водите</a>, чтобы просмотреть результаты тестирования пользователей.</p>
+            @endguest
         </div>
     </div>
 @endsection

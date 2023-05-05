@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TestAnswer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PhysicsTeacher
 {
@@ -35,7 +36,7 @@ class TestsPageController extends Controller
         return view('test', [
             "page_title" => "Тест",
             "internal_path" => "/test/",
-            "answers" => TestAnswer::all(),
+            "answers" => Auth::check() ? TestAnswer::all() : [],
         ]);
     }
 
