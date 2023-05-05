@@ -25,7 +25,8 @@
                 ['/fotos/', '/ Фотоальбом'],
                 ['/about/', '/ О проекте'],
                 ['/blog/', '/ Блог'],
-                ['/ledger/', '/ Отзывы']
+                ['/ledger/', '/ Отзывы'],
+                ['/spystat/', '/ *?%№№@'],
                 ] as $item)
                 <a @if ('/about/' == $item[0]) id="aboutMenuItem" @endif
                     @if ($internal_path == $item[0]) class="youre-here" @endif
