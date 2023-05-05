@@ -1,4 +1,4 @@
-<div class="spuing-record">
+<div class="spying-record">
     <p>Дата и время: {{ $datetime }}</p>
     <p>Страница: {{ $path }}</p>
     <p>IP: {{ $ip }}</p>
