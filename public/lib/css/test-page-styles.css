@@ -1090,4 +1090,9 @@ div.card-content img.icon-like {
   height: 140pt;
   padding: 14pt; }
 
+.pagination {
+  text-align: center; }
+  .pagination > li {
+    display: inline; }
+
 /*# sourceMappingURL=test-page-styles.css.map */

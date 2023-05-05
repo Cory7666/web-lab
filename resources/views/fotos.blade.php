@@ -15,6 +15,10 @@
 
         setPhotos(
             [
+                @foreach ($fotos as $foto)
+                new Photo("{{$foto->name}}", "{{$foto->path}}"),
+                @endforeach
+                /*
                 new Photo("Image 1", "/lib/image/album/image1.png"),
                 new Photo("Image 2", "/lib/image/album/image2.jpg"),
                 new Photo("Image 3", "/lib/image/album/image3.jpg"),
@@ -30,6 +34,7 @@
                 new Photo("Image 13", "/lib/image/album/image13.jpg"),
                 new Photo("Image 14", "/lib/image/album/image14.jpg"),
                 new Photo("Image 15", "/lib/image/album/image15.jpg")
+                */
             ]
         );
     </script>

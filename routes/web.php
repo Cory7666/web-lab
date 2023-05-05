@@ -7,6 +7,7 @@ use App\Http\Controllers\LedgerPageController;
 use App\Http\Controllers\BlogPageController;
 use App\Http\Controllers\TestsPageController;
 use App\Http\Controllers\AuthController;
+use App\Models\Foto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -45,6 +46,7 @@ Route::get('/fotos/', function (Request $r) {
     return view('fotos', [
         "page_title" => "Фотоальбом",
         "internal_path" => "/fotos/",
+        "fotos" => Foto::orderBy('name')->get(),
     ]);
 });
 

@@ -10,7 +10,7 @@
     <script src="/lib/script/jquery/jquery.js"></script>
     <script src="/lib/script/HorriblePersonData.js"></script>
     <script src="/lib/script/HorribleTestData.js"></script>
-    <script src="/lib/script/init_TestDataFormValidator.js"></script>
+    <!-- <script src="/lib/script/init_TestDataFormValidator.js"></script> -->
     <script type="module">
         import { addTargetElementHandler } from "/lib/script/init_ModalWindow.js"
         addTargetElementHandler(
@@ -34,6 +34,23 @@
 
 
 @section('content')
+    @if ($errors->any())
+        <div class="card">
+            <div class="card-header">
+                <h2>Ошибки</h2>
+            </div>
+            <div class="card-content">
+                <div id="error-messages">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="card">
         <div class="card-header">
             <h1>Тест</h1>

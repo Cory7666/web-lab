@@ -528,6 +528,11 @@ a {
 #aboutMenuItem-submenu {
   background-color: #010409; }
 
+.pagination {
+  text-align: center; }
+  .pagination > li {
+    display: inline; }
+
 .blog-record {
   display: block;
   padding-top: 20px;
