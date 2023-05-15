@@ -7,7 +7,6 @@ use App\Http\Controllers\LedgerPageController;
 use App\Http\Controllers\BlogPageController;
 use App\Http\Controllers\TestsPageController;
 use App\Http\Controllers\AuthController;
-use App\Models\Foto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -25,24 +24,24 @@ interface ActiveRecord
 class FotoAR implements ActiveRecord
 {
     private static string $__select_all_pattern = "SELECT * FROM 'fotos';",
-    $__select_specific_pattern = "SELECT * FROM 'fotos' WHERE 'id' = ?;",
-    $__insert_pattern = "INSERT INTO 'fotos' ('id', 'name', 'path') VALUES (?, ?, ?);",
-    $__update_pattern = "UPDATE 'fotos' SET 'name' = ?, 'path' = ? WHERE 'id' = ?;",
-    $__count = "SELECT COUNT(*) as c FROM 'fotos' WHERE 'id' = ?;";
+        $__select_specific_pattern = "SELECT * FROM 'fotos' WHERE 'id' = ?;",
+        $__insert_pattern = "INSERT INTO 'fotos' ('id', 'name', 'path') VALUES (?, ?, ?);",
+        $__update_pattern = "UPDATE 'fotos' SET 'name' = ?, 'path' = ? WHERE 'id' = ?;",
+        $__count = "SELECT COUNT(*) as c FROM 'fotos' WHERE 'id' = ?;";
 
     public function __construct(
         public string $name,
         public string $path,
         public int $id = -1,
-    )
-    {}
+    ) {
+    }
 
     public static function getAll(): array
     {
         return DB::select(FotoAR::$__select_all_pattern);
     }
 
-    public function get (int $id)
+    public function get(int $id)
     {
         return DB::select(FotoAR::$__select_specific_pattern, [$id])[0];
     }
@@ -50,13 +49,10 @@ class FotoAR implements ActiveRecord
     public function save(): void
     {
         $count = DB::select(FotoAR::$__count, [$this->id])[0]->c;
-        if (0 == $count)
-        {
+        if (0 == $count) {
             $this->id = $count;
             DB::insert(FotoAR::$__insert_pattern, [$this->id, $this->name, $this->path]);
-        }
-        else
-        {
+        } else {
             DB::update(FotoAR::$__update_pattern, [$this->name, $this->path, $this->id]);
         }
     }
@@ -76,7 +72,7 @@ class FotoAR implements ActiveRecord
 
 Route::get('/', function (Request $r) {
     SpyingRecord::spy_stealthily($r);
-    
+
     return view('main', [
         "page_title" => "Главная страница",
         "internal_path" => "/"
@@ -121,19 +117,27 @@ Route::get(
     [LedgerPageController::class, 'onGetRequest']
 );
 
-Route::post(
-    '/ledger',
-    [LedgerPageController::class, "onAddNew"]
-);
-
 Route::get(
     '/blog',
     [BlogPageController::class, 'onGetRequest']
 );
-
 Route::post(
     '/blog',
     [BlogPageController::class, 'onPostRequest']
+);
+
+
+Route::post(
+    '/ledger',
+    [LedgerPageController::class, "onAddNew"]
+);
+Route::post(
+    '/action/ledger/add/file',
+    [LedgerPageController::class, 'onAddRecordsFromFile']
+);
+Route::post(
+    '/action/ledger/add/record',
+    [LedgerPageController::class, 'onAddOneRecord']
 );
 
 
@@ -185,8 +189,7 @@ Route::get(
 
 Route::get(
     '/spystat',
-    function (Request $r)
-    {
+    function (Request $r) {
         return view('spystat', [
             "page_title" => "Spystat",
             "internal_path" => "/spystat/",

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateLedgerCommentFromFile;
+use App\Http\Requests\CreateLedgerCommitFromForm;
 use Illuminate\Http\Request;
 
 use App\Models\LedgerComment;
@@ -65,5 +67,35 @@ class LedgerPageController extends Controller
         } else {
             return back()->withErrors(["Вы должны бать зарегистрированы."]);
         }
+    }
+
+    public function onAddRecordsFromFile(CreateLedgerCommentFromFile $r)
+    {
+        $file = $r->file('uploaded_file');
+        $fd = fopen($file->openFile()->getPathname(), 'r');
+        $header = fgetcsv($fd);
+
+        while (($line = fgetcsv($fd)) !== FALSE) {
+            LedgerComment::create([
+                "firstname" => $line[0],
+                "lastname" => $line[1],
+                "email" => $line[2],
+                "body_text" => $line[3],
+            ]);
+        }
+
+        return redirect("/ledger");
+    }
+
+    public function onAddOneRecord(CreateLedgerCommitFromForm $r)
+    {
+        $curr_user = Auth::user();
+        LedgerComment::create([
+            'firstname' => $curr_user->firstname,
+            'lastname' => $curr_user->lastname,
+            'email' => $curr_user->email,
+            'body_text' => $r->get('text'),
+        ]);
+        return redirect("/ledger");
     }
 }

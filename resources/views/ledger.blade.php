@@ -29,7 +29,7 @@
                 <h2>Добавить отзыв</h2>
             </div>
             <div class="card-content">
-                <form action="/ledger" method="post" enctype="application/x-www-form-urlencoded">
+                <form action="/action/ledger/add/record" method="post" enctype="application/x-www-form-urlencoded">
                     @csrf
 
                     <textarea name="text" id="text-input" cols="30" rows="10" placeholder="Текст отзыва" required="true"></textarea>
@@ -44,7 +44,7 @@
                     <h2>Добавить пачку отзывов</h2>
                 </div>
                 <div class="card-content">
-                    <form action="/ledger" enctype="multipart/form-data" method="POST">
+                    <form action="/action/ledger/add/file" enctype="multipart/form-data" method="POST">
                         @csrf
 
                         <input type="file" name="uploaded_file" id="ledger-file-input" />
