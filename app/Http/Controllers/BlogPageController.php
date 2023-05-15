@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateOneRecordRequest;
 use App\Models\BlogRecord;
 use App\Models\SpyingRecord;
 use Illuminate\Http\Request;
@@ -25,34 +26,22 @@ class BlogPageController extends Controller
         );
     }
 
-    public function onPostRequest(Request $r)
+    public function onPostRequest(CreateOneRecordRequest $r)
     {
-        if (Auth::check()) {
-            $this->validate(
-                $r,
-                [
-                    'title' => ['required'],
-                    'body' => ['required'],
-                ]
-            );
-
-            if ($r->hasFile('uploaded_image')) {
-                $local_filename = $r->file('uploaded_image')->store('/images', 'blog');
-                BlogRecord::create([
-                    'title' => $r->title,
-                    'body_text' => $r->body,
-                    'image_path' => $local_filename,
-                ]);
-            } else {
-                BlogRecord::create([
-                    'title' => $r->title,
-                    'body_text' => $r->body,
-                ]);
-            }
-
-            return redirect('/blog');
+        if ($r->hasFile('uploaded_image')) {
+            $local_filename = $r->file('uploaded_image')->store('/images', 'blog');
+            BlogRecord::create([
+                'title' => $r->title,
+                'body_text' => $r->body,
+                'image_path' => $local_filename,
+            ]);
         } else {
-            return back()->withErrors(["Только адиминистраторы могут добавлять записи в блог."]);
+            BlogRecord::create([
+                'title' => $r->title,
+                'body_text' => $r->body,
+            ]);
         }
+
+        return redirect('/blog');
     }
 }
