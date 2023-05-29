@@ -7,11 +7,12 @@
 
 
 @section('scripts')
-@endsection
-
-
-
-@section('sidenav')
+    <script>
+        function onCheckEmailButtonClick()
+        {
+            document.getElementById('target-iframe').src = ('/action/checkemail?email=' + document.forms[1].email.value);
+        }
+    </script>
 @endsection
 
 
@@ -69,6 +70,8 @@
 
                 <label for="email-input">Логин </label>
                 <input type="email" name="email" id="email-input" />
+                <iframe id="target-iframe" src="" frameborder="0"></iframe>
+                <button onclick="onCheckEmailButtonClick()" type="button">Проверить доступность</button>
                 <br />
 
                 <label for="password-input">Пароль </label>

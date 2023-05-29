@@ -7,6 +7,7 @@ use App\Http\Controllers\LedgerPageController;
 use App\Http\Controllers\BlogPageController;
 use App\Http\Controllers\TestsPageController;
 use App\Http\Controllers\AuthController;
+use App\Models\BlogRecord;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -125,6 +126,14 @@ Route::post(
     '/blog',
     [BlogPageController::class, 'onPostRequest']
 );
+Route::post(
+    '/blog/comment',
+    [BlogPageController::class, 'onAddComment']
+);
+Route::post(
+    '/blog/{pk}/edit',
+    [BlogPageController::class, 'onUpdateRecordContent']
+);
 
 
 Route::post(
@@ -163,6 +172,10 @@ Route::post(
         return redirect('/');
     }
 );
+Route::get(
+    '/action/checkemail',
+    [AuthController::class, 'onEmailCheck']
+);
 
 
 
@@ -196,3 +209,6 @@ Route::get(
         ]);
     }
 );
+
+
+Route::get('/totest/', function (Request $r) { dd(BlogRecord::where('id', '=', 9000)->first()); });

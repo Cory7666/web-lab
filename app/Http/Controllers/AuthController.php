@@ -84,4 +84,14 @@ class AuthController extends Controller
             return back()->withErrors(['Неверный логин или пароль.']);
         }
     }
+
+    public function onEmailCheck(Request $r)
+    {
+        return view(
+            'api.email_check',
+            [
+                'count' => User::where('email', '=', $r->get('email'))->count(),
+            ]
+        );
+    }
 }

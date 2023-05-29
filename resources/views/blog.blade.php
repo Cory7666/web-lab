@@ -4,7 +4,11 @@
     <link rel="stylesheet" href="/lib/css/blog-page-styles.css" />
 @endsection
 
-
+@section('scripts')
+<script src="/lib/script/jquery/jquery.js"></script>
+<script src="/lib/script/add_comment_xhr_script.js"></script>    
+<script src="/lib/script/update_record_content_fetch.js"></script>    
+@endsection
 
 @section('content')
     <div class="card">
@@ -14,12 +18,28 @@
         <div class="card-content">
             @if (count($records) > 0)
                 @foreach ($records as $record)
+                <div class="record-container">
                     <x-blog-record
                         :title="$record->title"
                         :created-at="$record->created_at"
                         :body-text="$record->body_text"
                         :image-path="$record->image_path"
+                        :record-id="$record->id"
                     />
+                    <div class="comments-container">
+                    @foreach ($record->comments as $comment)
+                        <x-blog-record-comment
+                            :author-email="$comment->author->email"
+                            :text="$comment->body_text"
+                        />
+                    @endforeach
+                    </div>
+                    @auth
+                    <x-send-blog-record-comment-form
+                    :blog-record-id="$record->id"
+                    />
+                    @endauth
+                </div>
                 @endforeach
                 {{ $records->links('pagination.default') }}
             @else

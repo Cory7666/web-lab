@@ -12,6 +12,7 @@ class BlogRecord extends Component
         private string $title,
         private string $createdAt,
         private string $bodyText,
+        private string $recordId,
         private $imagePath = NULL
     )
     {}
@@ -25,6 +26,7 @@ class BlogRecord extends Component
                 'created_at' => $this->createdAt,
                 'body_text' => $this->bodyText,
                 'imagepath' => (($this->imagePath == '' || $this->imagePath == NULL) ? FALSE : "/lib/blog/" . $this->imagePath),
+                'record_id' => $this->recordId,
             ]
         );
     }
