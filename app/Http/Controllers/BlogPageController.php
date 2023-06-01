@@ -70,20 +70,37 @@ class BlogPageController extends Controller
     {
         $result = false;
         $new_content = '';
+        $new_title = '';
         $record = BlogRecord::where('id', '=', $pk)->first();
         
         if ($record != null)
         {
+            $record->title = $r->get('title');
             $record->body_text = $r->get('content');
+
+            if ($r->hasFile('uploaded_image'))
+            {
+                $record->image_path = $r->file('uploaded_image')->store('/images', 'blog');
+            }
+
             $record->save();
 
             $result = true;
             $new_content = $record->body_text;
+            $new_title = $record->title;
         }
 
         return view('api.edit_record', [
             'result' => $result,
             'content' => $new_content,
+            'title' => $new_title,
+            'image_path' => "/lib/blog/".$record->image_path,
         ]);
+    }
+
+    public function onDeleteRecord(Request $r, int $pk)
+    {
+        BlogRecord::where('id', '=', $pk)->first()->delete();
+        return redirect('/blog/');
     }
 }

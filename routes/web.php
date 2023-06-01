@@ -134,6 +134,10 @@ Route::post(
     '/blog/{pk}/edit',
     [BlogPageController::class, 'onUpdateRecordContent']
 );
+Route::delete(
+    '/blog/{pk}/',
+    [BlogPageController::class, 'onDeleteRecord']
+);
 
 
 Route::post(
